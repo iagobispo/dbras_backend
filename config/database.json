@@ -1,0 +1,4 @@
+{
+    "dbTest": "mongodb+srv://iago:brasil222@de-bras.1m2n3.mongodb.net/marktplace-de-bras?retryWrites=true&w=majority",
+    "dbProduction": "mongodb://localhost:27017/ecommerce-api"
+}
