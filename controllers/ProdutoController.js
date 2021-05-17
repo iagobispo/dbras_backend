@@ -104,16 +104,26 @@ class ProdutoController {
         try {
             const { loja } = req.query;
             const produto = await Produto.findOne({ _id: req.params.id, loja });
+            //const produto = await Produto.findById({ _id: req.params.id});
             if(!produto) return res.status(400).send({ error: "Produto não encontrado." });
 
-            const novasImagens = req.files.map(item => item.filename);
+            const novasImagens = req.files.map(item => item.originalname);
             const urlImagens = req.files.map(item => item.location);
             produto.fotos = produto.fotos.filter(item => item).concat(novasImagens);
             produto.url = produto.url.filter(item => item).concat(urlImagens);
+            //produto.url = produto.url.concat(urlImagens);
 
             await produto.save();
 
+            //console.log(req.files[0].originalname)
+
             return res.send({ produto });
+
+            //console.log(produto) 
+
+            //return res.send('DKDKKDK');
+            
+            
         } catch (e){
             next(e);
         }

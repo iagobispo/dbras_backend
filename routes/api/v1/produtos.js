@@ -16,6 +16,7 @@ const produtoController = new ProdutoController();
 router.post("/", auth, Validation(ProdutoValidation.store), produtoController.store);
 router.put("/:id", auth, LojaValidation.admin, Validation(ProdutoValidation.update), produtoController.update);
 router.put("/images/:id",  auth, LojaValidation.admin, Validation(ProdutoValidation.updateImages), multer(upload).array("files", 4), produtoController.updateImages);
+//router.put("/images/:id", multer(upload).array("files", 4), produtoController.updateImages);
 router.delete("/:id", auth, LojaValidation.admin, Validation(ProdutoValidation.remove), produtoController.remove);
 
 // CLIENTES/VISITANTES
