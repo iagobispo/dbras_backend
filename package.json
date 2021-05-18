@@ -10,7 +10,7 @@
   "scripts": {
     "test": "mocha --timeout 2000 --exit",
     "dev": "NODE_ENV=development & nodemon server.js",
-    "start": "NODE_ENV=development & node server.js",
+    "start": "node server.js",
     "build": "NODE_ENV=production pm2 start server.js --name=\"ecommerce-api\""
   },
   "author": "Iago Bispo",
