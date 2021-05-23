@@ -79,7 +79,8 @@ class UsuarioController {
         Usuario.findOne({ email }).then((usuario) => {
             if(!usuario) return res.status(401).json({ errors: "Usuario não registrado" });
             if(!usuario.validarSenha(password)) return res.status(401).json({ errors: "Senha inválida" });
-            return res.json({ usuario: usuario.enviarAuthJSON() });
+            const data = {usuario: usuario.enviarAuthJSON()}
+            return res.json(data);
         }).catch(next);
     }
 
