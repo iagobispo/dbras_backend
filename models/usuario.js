@@ -56,10 +56,22 @@ UsuarioSchema.methods.gerarToken = function(){
     exp.setDate(hoje.getDate() + 15);
 
     return jwt.sign({
-       
+        id: this._id,
+        email: this.email,
+        nome: this.nome,
         exp: parseFloat(exp.getTime() / 1000, 10)
     }, secret);
 };
+
+UsuarioSchema.methods.generateToken = function () {
+    return jwt.sign({
+        id: this._id,
+        email: this.email,
+        nome: this.nome,
+    } ,secret, {
+        expiresIn: "20d",//86400
+    })
+}
 
 UsuarioSchema.methods.enviarAuthJSON = function(){
     return {
@@ -68,7 +80,7 @@ UsuarioSchema.methods.enviarAuthJSON = function(){
         email: this.email,
         loja: this.loja,
         role: this.permissao,
-        token: this.gerarToken()
+        token: this.generateToken()
     };
 };
 
