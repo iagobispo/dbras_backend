@@ -56,14 +56,12 @@ UsuarioSchema.methods.gerarToken = function(){
     const exp = new Date(hoje);
     exp.setDate(hoje.getDate() + 15);
 
-    return 'oiii'
-
-    // return jwt.sign({
-    //     // id: this._id,
-    //     // email: this.email,
-    //     // nome: this.nome,
-    //     // exp: parseFloat(exp.getTime() / 1000, 10)
-    // }, secret);
+    return jwt.sign({
+        id: this._id,
+        email: this.email,
+        nome: this.nome,
+        exp: parseFloat(exp.getTime() / 1000, 10)
+    }, secret);
 };
 
 UsuarioSchema.methods.enviarAuthJSON = function(){
