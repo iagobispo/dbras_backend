@@ -7,6 +7,7 @@ const { UsuarioValidation } = require("../../../controllers/validacoes/usuarioVa
 
 const usuarioController = new UsuarioController();
 
+// router.post("/login", Validation(UsuarioValidation.login), usuarioController.login); // testado
 router.post("/login", usuarioController.login); // testado
 router.post("/registrar", Validation(UsuarioValidation.store), usuarioController.store); // testado
 router.put("/", auth, Validation(UsuarioValidation.update), usuarioController.update); // testado
