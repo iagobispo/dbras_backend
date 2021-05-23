@@ -50,10 +50,10 @@ UsuarioSchema.methods.validarSenha = function(password){
     return hash === this.hash;
 };
 
-UsuarioSchema.methods.gerarToken = async function(){
+UsuarioSchema.methods.gerarToken = function(){
     const hoje = new Date();
     const exp = new Date(hoje);
-  await exp.setDate(hoje.getDate() + 15);
+   exp.setDate(hoje.getDate() + 15);
 
     return jwt.sign({
         id: this._id,
