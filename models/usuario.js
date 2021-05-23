@@ -63,15 +63,16 @@ UsuarioSchema.methods.gerarToken = function(){
     }, secret);
 };
 
-UsuarioSchema.methods.enviarAuthJSON = function(){
-    return {
+UsuarioSchema.methods.enviarAuthJSON = async function(){
+    data = await {
         _id: this._id,
         nome: this.nome,
         email: this.email,
         loja: this.loja,
         role: this.permissao,
         token: this.gerarToken()
-    };
+    }
+    return data
 };
 
 // RECUPERACAO
