@@ -64,15 +64,16 @@ UsuarioSchema.methods.gerarToken = function(){
 };
 
 UsuarioSchema.methods.enviarAuthJSON = async function(){
-    data = await {
+    const  token = await this.gerarToken()
+    return {
         _id: this._id,
         nome: this.nome,
         email: this.email,
         loja: this.loja,
         role: this.permissao,
-        token: this.gerarToken()
-    }
-    return data
+        token
+       // token: this.gerarToken()
+    };
 };
 
 // RECUPERACAO
