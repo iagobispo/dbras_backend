@@ -56,7 +56,9 @@ UsuarioSchema.methods.gerarToken = function(){
     exp.setDate(hoje.getDate() + 15);
 
     return jwt.sign({
-        email: 'iagobispo56@gmail.com',
+        id: this._id,
+        email: this.email,
+        nome: this.nome,
         exp: parseFloat(exp.getTime() / 1000, 10)
     }, secret);
 };
@@ -68,7 +70,7 @@ UsuarioSchema.methods.enviarAuthJSON = function(){
         email: this.email,
         loja: this.loja,
         role: this.permissao,
-       // token: this.gerarToken()
+        token: this.gerarToken()
     };
 };
 

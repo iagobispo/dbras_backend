@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 const Usuario = mongoose.model("Usuario");
 const enviarEmailRecovery = require("../helpers/email-recovery");
 
+function generateToken(params = {}) {
+    return jwt.sign(params ,secret, {
+        expiresIn: "20d",//86400
+    })
+}
+
 class UsuarioController {
 
     // GET /
@@ -79,7 +85,8 @@ class UsuarioController {
         Usuario.findOne({ email }).then((usuario) => {
             if(!usuario) return res.status(401).json({ errors: "Usuario não registrado" });
             if(!usuario.validarSenha(password)) return res.status(401).json({ errors: "Senha inválida" });
-            return res.json({ usuario: usuario.enviarAuthJSON() });
+           // return res.json({ usuario: usuario.enviarAuthJSON() });
+           return res.send(usuario, generateToken({id: usuario._id}))
         }).catch(next);
     }
 
