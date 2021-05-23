@@ -70,7 +70,7 @@ UsuarioSchema.methods.enviarAuthJSON = function(){
         email: this.email,
         loja: this.loja,
         role: this.permissao,
-        token: this.gerarToken()
+       // token: this.gerarToken()
     };
 };
 
