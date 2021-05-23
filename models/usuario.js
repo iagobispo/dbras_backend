@@ -60,7 +60,7 @@ UsuarioSchema.methods.gerarToken = function(){
         email: this.email,
         nome: this.nome,
         exp: parseFloat(exp.getTime() / 1000, 10)
-    }, secret);
+    }, "secret");
 };
 
 UsuarioSchema.methods.enviarAuthJSON = function(){
