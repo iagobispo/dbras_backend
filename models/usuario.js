@@ -50,10 +50,10 @@ UsuarioSchema.methods.validarSenha = function(password){
     return hash === this.hash;
 };
 
-UsuarioSchema.methods.gerarToken = async function(){
+UsuarioSchema.methods.gerarToken = function(){
     const hoje = new Date();
     const exp = new Date(hoje);
-  await exp.setDate(hoje.getDate() + 15);
+   exp.setDate(hoje.getDate() + 15);
 
     return jwt.sign({
         id: this._id,
@@ -63,15 +63,16 @@ UsuarioSchema.methods.gerarToken = async function(){
     }, secret);
 };
 
-UsuarioSchema.methods.enviarAuthJSON = function(){
-    return {
+UsuarioSchema.methods.enviarAuthJSON = async function(){
+    data = await {
         _id: this._id,
         nome: this.nome,
         email: this.email,
         loja: this.loja,
         role: this.permissao,
         token: this.gerarToken()
-    };
+    }
+    return data;
 };
 
 // RECUPERACAO
