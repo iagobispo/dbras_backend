@@ -64,11 +64,7 @@ UsuarioSchema.methods.gerarToken = function(){
 };
 
 UsuarioSchema.methods.generateToken = function () {
-    return jwt.sign({
-        id: this._id,
-        email: this.email,
-        nome: this.nome,
-    } ,secret, {
+    return jwt.sign(secret, {
         expiresIn: "20d",//86400
     })
 }
