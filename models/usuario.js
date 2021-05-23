@@ -50,29 +50,27 @@ UsuarioSchema.methods.validarSenha = function(password){
     return hash === this.hash;
 };
 
-UsuarioSchema.methods.gerarToken = async function(){
+UsuarioSchema.methods.gerarToken = function(){
     const hoje = new Date();
     const exp = new Date(hoje);
- await  exp.setDate(hoje.getDate() + 15);
-const data = await jwt.sign({
-    id: this._id,
-    email: this.email,
-    nome: this.nome,
-    exp: parseFloat(exp.getTime() / 1000, 10)
-}, secret);
-    return data
+    exp.setDate(hoje.getDate() + 15);
+
+    return jwt.sign({
+        id: this._id,
+        email: this.email,
+        nome: this.nome,
+        exp: parseFloat(exp.getTime() / 1000, 10)
+    }, secret);
 };
 
-UsuarioSchema.methods.enviarAuthJSON = async function(){
-    const  token = await this.gerarToken()
+UsuarioSchema.methods.enviarAuthJSON = function(){
     return {
         _id: this._id,
         nome: this.nome,
         email: this.email,
         loja: this.loja,
         role: this.permissao,
-        token
-       // token: this.gerarToken()
+        token: this.gerarToken()
     };
 };
 
