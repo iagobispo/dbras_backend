@@ -50,17 +50,17 @@ UsuarioSchema.methods.validarSenha = function(password){
     return hash === this.hash;
 };
 
-UsuarioSchema.methods.gerarToken = function(){
+UsuarioSchema.methods.gerarToken = async function(){
     const hoje = new Date();
     const exp = new Date(hoje);
-   exp.setDate(hoje.getDate() + 15);
-
-    return jwt.sign({
-        id: this._id,
-        email: this.email,
-        nome: this.nome,
-        exp: parseFloat(exp.getTime() / 1000, 10)
-    }, secret);
+ await  exp.setDate(hoje.getDate() + 15);
+const data = await jwt.sign({
+    id: this._id,
+    email: this.email,
+    nome: this.nome,
+    exp: parseFloat(exp.getTime() / 1000, 10)
+}, secret);
+    return data
 };
 
 UsuarioSchema.methods.enviarAuthJSON = async function(){
