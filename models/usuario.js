@@ -63,15 +63,14 @@ UsuarioSchema.methods.gerarToken = function(){
     }, secret);
 };
 
-UsuarioSchema.methods.enviarAuthJSON = async function(){
-    const token = await this.gerarToken()
+UsuarioSchema.methods.enviarAuthJSON = function(){
     return {
         _id: this._id,
         nome: this.nome,
         email: this.email,
         loja: this.loja,
         role: this.permissao,
-        token
+        token: this.gerarToken()
     };
 };
 
