@@ -76,11 +76,11 @@ class UsuarioController {
     // POST /login
    async login(req, res, next){
         const { email, password } = await req.body;
-        Usuario.findOne({ email }).then(async (usuario) => {
+        Usuario.findOne({ email }).then((usuario) => {
             if(!usuario) return res.status(401).json({ errors: "Usuario não registrado" });
             if(!usuario.validarSenha(password)) return res.status(401).json({ errors: "Senha inválida" });
-            const data = await {usuario: usuario.enviarAuthJSON()}
-            return res.json(data);
+            
+            return res.json({ usuario: usuario.enviarAuthJSON() });
         }).catch(next);
     }
 
