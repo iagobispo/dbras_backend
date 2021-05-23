@@ -56,7 +56,7 @@ UsuarioSchema.methods.gerarToken = function(){
     const exp = new Date(hoje);
     exp.setDate(hoje.getDate() + 15);
 
-    return oiii
+    return 'oiii'
 
     // return jwt.sign({
     //     // id: this._id,
